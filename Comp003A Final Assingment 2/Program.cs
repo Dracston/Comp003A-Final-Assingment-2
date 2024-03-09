@@ -14,6 +14,7 @@
         static bool CheckInt(string userInput) ///<summary> Int Validation sending a boolean to make sure it is a number </summary>
         {
         
+
             try
             {
                 int useResult = Convert.ToInt32(userInput);
