@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Comp003A_Final_Assingment_2
@@ -31,85 +33,108 @@ namespace Comp003A_Final_Assingment_2
 
             Console.WriteLine("Hello, and welcome to Helldiver enlistment! Below are a few short questions we need you to answer truthfully.");
 
-            Console.WriteLine($"{questionarre[1]}");
+            Console.WriteLine($"{questionarre[0]}");
             string firstName = Console.ReadLine();
             StringValidation(firstName);
             userAnswers.Add(firstName);
 
-            Console.WriteLine($"{questionarre[2]}");
+            Console.WriteLine($"{questionarre[1]}");
             string lastName = Console.ReadLine();
             StringValidation(lastName);
             userAnswers.Add(lastName);
 
-            Console.WriteLine($"[{questionarre[3]}");
+            Console.WriteLine($"{questionarre[2]}");
             string birthYear = Console.ReadLine();
             YearValidation(birthYear);
             userAnswers.Add(birthYear);
 
-            Console.WriteLine($"{questionarre[4]}");
-            char gender=Convert.ToChar(Console.ReadLine());
+            
+            
+            Console.WriteLine($"{questionarre[3]}");
+            char gender = Convert.ToChar(Console.ReadLine());
             GenderValidation(gender);
             userAnswers.Add(GenderValidation(gender));
+            
+            
 
-            Console.WriteLine($"{questionarre[5]}");
+
+            Console.WriteLine($"{questionarre[4]}");
             string userHeight = Console.ReadLine();
             HeightValidation(userHeight);
             userAnswers.Add(userHeight);
 
-            Console.WriteLine($"{questionarre[6]}");
+            Console.WriteLine($"{questionarre[5]}");
             string combatReady = Console.ReadLine();
             HeightValidation(combatReady);
             userAnswers.Add(combatReady);
 
-            Console.WriteLine($"{questionarre[7]}");
+            Console.WriteLine($"{questionarre[6]}");
             string questionSevenAnswer = Console.ReadLine();
             StringValidation(questionSevenAnswer);
             userAnswers.Add(questionSevenAnswer);
 
-            Console.WriteLine($"{questionarre[8]}");
+            Console.WriteLine($"{questionarre[7]}");
             string shoeSize = Console.ReadLine();
             HeightValidation(shoeSize);
             userAnswers.Add(shoeSize);
 
-            Console.WriteLine($"{questionarre[9]}");
+            Console.WriteLine($"{questionarre[8]}");
             string questionNineAnswer = Console.ReadLine();
             StringValidation(questionNineAnswer);
             userAnswers.Add(questionNineAnswer);
 
-            Console.WriteLine($"{questionarre[10]}");
+            Console.WriteLine($"{questionarre[9]}");
             string userSpeed = Console.ReadLine();
             HeightValidation(userSpeed);
             userAnswers.Add(userSpeed);
 
-            Console.WriteLine($"{questionarre[11]}");
+            Console.WriteLine($"{questionarre[10]}");
             string questionElevenAnswer = Console.ReadLine();
             StringValidation(questionElevenAnswer);
             userAnswers.Add(questionElevenAnswer);
 
-            Console.WriteLine($"{questionarre[12]}");
+            Console.WriteLine($"{questionarre[11]}");
             string questionTwelveAnswer = Console.ReadLine();
             StringValidation(questionTwelveAnswer);
             userAnswers.Add(questionTwelveAnswer);
 
-            Console.WriteLine($"{questionarre[13]}");
+            Console.WriteLine($"{questionarre[12]}");
             string carryWeight = Console.ReadLine();
             HeightValidation(carryWeight);
             userAnswers.Add(carryWeight);
 
-            Console.WriteLine($"{questionarre[14]}");
+            Console.WriteLine($"{questionarre[13]}");
             string questionFourteenAnswer = Console.ReadLine();
             StringValidation(questionFourteenAnswer);
             userAnswers.Add(questionFourteenAnswer);
 
-            Console.WriteLine($"{questionarre[15]}");
+            Console.WriteLine($"{questionarre[14]}");
             string questionFifteenAnswer = Console.ReadLine();
             StringValidation(questionFifteenAnswer);
             userAnswers.Add(questionFifteenAnswer);
 
 
 
-            for (int i = 0; i < userAnswers.Count; i++)            
+          
+
+           for (int i = 0; i < questionarre.Count; i++)
             {
+                while (i == 2)
+                {
+                    Console.WriteLine($"Full Name: {userAnswers[0]} {userAnswers[1]}.");
+                    break;
+                }
+                 
+                
+               while (i == 3)
+                {
+                    
+                    Console.WriteLine($"Current age is: {DateTime.Now.Year - CreateInt(birthYear)}");
+                    break;
+                    
+                }
+               
+                 
                 
                 Console.WriteLine(questionarre[i]);
                 Console.WriteLine(userAnswers[i]);
@@ -202,15 +227,23 @@ namespace Comp003A_Final_Assingment_2
 
         static string StringValidation(string userInput)
         {
-            if (CheckInt(userInput))
-            {
-                Console.WriteLine("Give me a real answer, no need for numbers here");
-                userInput = Console.ReadLine();
-                StringValidation(userInput);
-            }
-            else if (!CheckInt(userInput))
-            {
+            
+                if (CheckInt(userInput))
+                {
+                    Console.WriteLine("Give me a real answer, no need for numbers here");
+                    userInput = Console.ReadLine();
+                    StringValidation(userInput);
+                }
+                else if (!CheckInt(userInput))
+                {
+
+                }
                 
+                if(userInput.Length == 0)
+            {
+                Console.WriteLine("Please answer the question.");
+                userInput= Console.ReadLine();
+                StringValidation(userInput);
             }
             return userInput;
         }
@@ -219,7 +252,7 @@ namespace Comp003A_Final_Assingment_2
         {
             
             
-                char.ToUpper(userInput);
+                userInput= char.ToUpper(userInput);
             
                 if (userInput == 'M')
                 {
