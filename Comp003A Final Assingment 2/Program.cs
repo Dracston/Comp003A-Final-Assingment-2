@@ -30,16 +30,18 @@ namespace Comp003A_Final_Assingment_2
 
 
 
-            ///<summary> 
-            ///Each question was written individually, as each question needed different validation types
-            ///
-            /// /summary>
+             
+            //Each question was written individually, as each question needed different validation types
+           
+            
             Console.WriteLine("Hello, and welcome to Helldiver enlistment! Below are a few short questions we need you to answer truthfully.");
 
-            Console.WriteLine($"{questionarre[0]}");  ///<param> Write the question out
-            string firstName = Console.ReadLine();     /// Take a unique variable for the question and set it to ReadLine
-            StringValidation(firstName);               /// Call the appropriate method. Either needing to validate a string or integer. Or two specialized ones
-            userAnswers.Add(firstName);                /// Then save the returned string to the array of userAnswers[] </param>
+            StringQuestion(questionarre[0], userAnswers);
+
+            Console.WriteLine($"{questionarre[0]}");  
+            string firstName = Console.ReadLine();     
+            StringValidation(firstName);               
+            userAnswers.Add(firstName);               
 
             Console.WriteLine($"{questionarre[1]}");
             string lastName = Console.ReadLine();
@@ -76,8 +78,8 @@ namespace Comp003A_Final_Assingment_2
             StringValidation(questionSevenAnswer);
             userAnswers.Add(questionSevenAnswer);
 
-            Console.WriteLine($"{questionarre[7]}");  ///<summary> Because HeightValidation allows for any int between 1-3 digits. O re-use it for all int validations.
-            string shoeSize = Console.ReadLine();     /// I just found it simple to keep the name as is. But HeightValidation = Validator for ant 1-3 digit number </summary>
+            Console.WriteLine($"{questionarre[7]}");  // Because HeightValidation allows for any int between 1-3 digits. O re-use it for all int validations.
+            string shoeSize = Console.ReadLine();     // I just found it simple to keep the name as is. But HeightValidation = Validator for ant 1-3 digit number 
             HeightValidation(shoeSize);
             userAnswers.Add(shoeSize);
 
@@ -122,34 +124,34 @@ namespace Comp003A_Final_Assingment_2
             ///<summary>First while loop states the user's full name after it has been given. Second while loop stops the main for loop to write the user's age. 
             for (int i = 0; i < questionarre.Count; i++)
             {
-                while (i == 2)
+                if (i == 2)
                 {
                     Console.WriteLine($"Full Name: {userAnswers[0]} {userAnswers[1]}.");
                     break;//break to avoid stackoverflow
                 }
-                 
-                
-               while (i == 3)
+
+
+                else if (i == 3)
                 {
-                    
+
                     Console.WriteLine($"Current age is: {DateTime.Now.Year - CreateInt(birthYear)}");
                     break; //break to avoid stackoverflow
-                    
+
                 }
-               
-                 
-                
-                Console.WriteLine(questionarre[i]);
-                Console.WriteLine(userAnswers[i]);
-                
+                else
+                {
+                    Console.WriteLine(questionarre[i]);
+                    Console.WriteLine(userAnswers[i]);
+                }
 
             }
 
 
 
         }
+        ///<summary> Int Validation sending a boolean to make sure it is a number </summary>
         static bool CheckInt(string userInput)
-            ///<summary> Int Validation sending a boolean to make sure it is a number </summary>
+            
         {
 
             int result;
@@ -157,15 +159,17 @@ namespace Comp003A_Final_Assingment_2
            
 
         }
+        /// <summary> This is taking the same input as CheckInt and turning it into a usable int if calculations are needed </summary>
         static int CreateInt(string userInput) 
-            /// <summary> This is taking the same input as CheckInt and turning it into a usable int if calculations are needed </summary>
+           
         {
             int useResult = Convert.ToInt32(userInput);
             return useResult;
         }
-       
+
+        ///<summary> Validate my Int for asking someone's height/ any 1-3 digit number </summary>
         static string HeightValidation(string userHeight) 
-            ///<summary> Validate my Int for asking someone's height/ any 1-3 digit number </summary>
+            
         {
             if (CheckInt(userHeight))
             {
@@ -207,17 +211,13 @@ namespace Comp003A_Final_Assingment_2
                     birthYear = Console.ReadLine();
                     YearValidation(birthYear);
                 }
-                else if (userYear > 2024)
+                else if (userYear > DateTime.Now.Year)
                 {
                     Console.WriteLine("Please re-enter birth year. That's too young, even for us!");
                     birthYear = Console.ReadLine();
                     YearValidation(birthYear);
                 }
-                else if (userYear > 1900 && userYear < 2024)
-                {
-                    
-                    
-                }
+                
             }
             else //Checks here to make sure no null/ string values are given
             {
@@ -228,10 +228,11 @@ namespace Comp003A_Final_Assingment_2
             return birthYear;
         }
 
+        ///<summary>Simple Try.Parse, but code cluster only moves forward if the check is false </summary>
         static string StringValidation(string userInput)
         { 
-            ///<summary>Simple Try.Parse, but code cluster only moves forward if the check is false
-            ///</summary>
+            
+            
             
                 if (CheckInt(userInput))
                 {
@@ -253,11 +254,12 @@ namespace Comp003A_Final_Assingment_2
             return userInput;
         }
 
+        ///<summary>
+        ///Makes the user only able to input one char. Changes that char into a string for userAnswers list. 
+        /// </summary>
         static string GenderValidation(char userInput)
         { 
-            ///<summary>
-            ///Makes the user only able to input one char. Changes that char into a string for userAnswers list. 
-            /// </summary>
+           
             
             
                 userInput= char.ToUpper(userInput);
@@ -281,12 +283,20 @@ namespace Comp003A_Final_Assingment_2
                 else 
                 {
                 Console.WriteLine("Please select 'M', 'F', or 'O'");
+                userInput = Convert.ToChar(Console.ReadLine());
                 return userInput.ToString(); //This is mostly here so the Method feels like it will always have a return value occurring. 
-                userInput =Convert.ToChar(Console.ReadLine());
                 GenderValidation(userInput);
             
                 } 
             
+        }
+        static void StringQuestion(List<string> fromQuestionnare, List<string> receivingArray)
+        {
+            Console.WriteLine($"{fromQuestionnare[0]}");  ///<param> Write the question out
+            string firstName = Console.ReadLine();     /// Take a unique variable for the question and set it to ReadLine
+            StringValidation(firstName);               /// Call the appropriate method. Either needing to validate a string or integer. Or two specialized ones
+            receivingArray.Add(firstName);                /// Then save the returned string to the array of userAnswers[] </param>
+
         }
 
     }
