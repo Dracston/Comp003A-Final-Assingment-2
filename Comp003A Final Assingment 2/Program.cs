@@ -5,6 +5,8 @@
  */
 
 
+using System.Data;
+
 namespace Comp003A_Final_Assingment_2
 {
 
@@ -129,7 +131,8 @@ namespace Comp003A_Final_Assingment_2
             LineSeperator("Let's Review");
 
 
-            ///<summary>First while loop states the user's full name after it has been given. Second while loop stops the main for loop to write the user's age. 
+            ///<summary>First if states the user's full name after it has been given. Second if writes the user's age. 
+            ///Otherwise it simply traverses down both Lists and copies the user's answers. 
             for (int i = 0; i < questionnare.Count; i++)
             {
                 if (i == 2)
@@ -165,7 +168,7 @@ namespace Comp003A_Final_Assingment_2
 
 
             ///<summary> Int Validation sending a boolean to make sure it is a number 
-            ///Also is used for exception handeling so no numbers are used where I don't want them/ no words are used when I want numbers
+            /// Used for exception handeling so no numbers are used where I don't want them/ no words are used when I want numbers
             /// </summary>
             static bool CheckInt(string userInput)
 
@@ -197,7 +200,9 @@ namespace Comp003A_Final_Assingment_2
             return 0;
             }
 
-            ///<summary> Validate my Int for asking someone's height/ any 1-3 digit number </summary>
+            ///<summary> Validate my Int for asking someone's height/ any 1-3 digit number
+            
+            /// </summary>
             static string HeightValidation(string userHeight)
 
             {
@@ -205,10 +210,10 @@ namespace Comp003A_Final_Assingment_2
                 {
                 try
                 {
-                    if (userHeight.Length <= 3 && userHeight.Length >= 1)
+                    if (userHeight.Length <= 3 && userHeight.Length >= 1) //It's been kept as is and simplifying the parameters led to unnecessary issues for me, and I don't want too large a number input.
                     {
 
-
+                        //Kept empty since no additional lines are needed, and it goes into the second filter
 
                     }
                     else
@@ -219,12 +224,12 @@ namespace Comp003A_Final_Assingment_2
                         //Internal loop smoothly allows the user to continue trying to enter data until it is the right data type
                     }
                 }
-                catch (NoNullAllowedException) {
+                catch (NoNullAllowedException) { //Added a Null catch that loops the method
                     Console.WriteLine("Try that one more time, I need a number!");
                     userHeight = Console.ReadLine();
                     HeightValidation(userHeight);
                 }
-                catch (Exception ex) {
+                catch (Exception ex) { //Added a baseline exception catch that lops method
                     Console.WriteLine("Try that one more time, I need a number!");
                     userHeight = Console.ReadLine();
                     HeightValidation(userHeight);
@@ -255,7 +260,7 @@ namespace Comp003A_Final_Assingment_2
                         birthYear = Console.ReadLine();
                         YearValidation(birthYear);
                     }
-                    else if (userYear > DateTime.Now.Year)
+                    else if (userYear > DateTime.Now.Year) //Now takes current DateTime and still funcitons
                     {
                         Console.WriteLine("Please re-enter birth year. That's too young, even for us!");
                         birthYear = Console.ReadLine();
@@ -273,7 +278,7 @@ namespace Comp003A_Final_Assingment_2
             }
 
             ///<summary>Simple Try.Parse, but code cluster only moves forward if the check is false </summary>
-            static string StringValidation(string userInput)
+            static string StringValidation(string userInput) //Trying to add the whitespace catch ended with this never accepting the given value. Has been reverted to original
             {
             if (CheckInt(userInput))
             {
@@ -295,7 +300,7 @@ namespace Comp003A_Final_Assingment_2
 
 
 
-          /*  if (userInput == null) //string.IsNullOrWhiteSpace(userInput))
+          /*  if (userInput == null) //string.IsNullOrWhiteSpace(userInput)) //The attempted addition of whitespace catch is here.
                 {
                     if (CheckInt(userInput))
                     {
@@ -329,7 +334,7 @@ namespace Comp003A_Final_Assingment_2
             ///<summary>
             ///Makes the user only able to input one char. Changes that char into a string for userAnswers list. 
             /// </summary>
-            static string GenderValidation(string userInput)
+            static string GenderValidation(string userInput) //No longer allows for null values, nor does it allow large strings.
             {
 
                 
@@ -354,7 +359,8 @@ namespace Comp003A_Final_Assingment_2
                 else
                 {
                     Console.WriteLine("Please select 'M', 'F', or 'O'");
-                    userGender =(Console.ReadLine());
+                    userGender =Console.ReadLine().ToUpper();
+                    
                     
                     GenderValidation(userGender);
                     
@@ -365,9 +371,13 @@ namespace Comp003A_Final_Assingment_2
             }
             
 
+        /// <summary>
+        /// Added a seperator for cleanliness on final product. 
+        /// </summary>
+        /// <param name="topic"></param>
            static void LineSeperator(string topic)
         {
-            Console.WriteLine("".PadRight(50, '*') + $"\n\t{topic}" + "\n".PadRight(51, '*'));
+            Console.WriteLine("".PadRight(50, '*') + $"\n\t{topic}" + "\n".PadRight(51, '*')); 
         }
        
             }
